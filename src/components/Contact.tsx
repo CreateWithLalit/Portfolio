@@ -1,18 +1,11 @@
-import { useState, useEffect } from 'react'
-import { supabase } from '../supabase'
+import { useState } from 'react'
 import emailjs from '@emailjs/browser'
 
 const Contact = () => {
-  const [resumeUrl, setResumeUrl] = useState('')
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
-
-  useEffect(() => {
-    const { data } = supabase.storage.from('resume').getPublicUrl('resume.pdf')
-    if (data) setResumeUrl(data.publicUrl)
-  }, [])
 
   // Email validation function
   const isValidEmail = (email: string) => {
@@ -110,13 +103,11 @@ const Contact = () => {
               style={{ fontFamily: "'Press Start 2P', cursive" }}>
               LinkedIn
             </a>
-            {resumeUrl && (
-              <a href={resumeUrl} target="_blank"
+              <a href="/Lalit_Resume.pdf" target="_blank"
                 className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 text-xs"
                 style={{ fontFamily: "'Press Start 2P', cursive" }}>
                 Resume
               </a>
-            )}
           </div>
 
           <p className="text-gray-600 text-xs mt-12" style={{ fontFamily: "'Press Start 2P', cursive" }}>
